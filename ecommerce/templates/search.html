@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+<div class="container-fluid" style="margin-bottom:100px">
+
+
+    <div class="row">
+        {% if p %}
+        <h3>YOU HAVE SEARCHED FOR {{q}}</h3>
+        {% for i in p %}
+        <div class="col-sm-4" style="">
+            <div class="card" style="">
+                <img src="{{ i.image.url }}" alt="{{ i.name }}" class="card-img-top" style="width:150px; height:150px; object-fit: fill;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ i.name }}</h5>
+                    <p class="card-text">{{ i.price }}</p>
+                     <a href="{% url  'shop:det' i.name %}" class="btn btn-danger shop-now-link">Details</a>
+                </div>
+            </div>
+        </div>
+         {% endfor %}
+        {% else %}
+        <div>
+            <p>result not found</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

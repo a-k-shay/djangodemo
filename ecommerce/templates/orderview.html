@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name of the Customer</th>
+                <th>Product Name</th>
+                <th>Product Price</th>
+                <th>Delivery Address</th>
+                <th>No. of Items</th>
+                <th>Ordered On</th>
+                <th>Delivery Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in o %}
+                <tr>
+                    <td>{{ user.username }}</td>
+                    <td>{{ i.product.name }}</td>
+                    <td>{{ i.product.price }}</td>
+                    <td>{{ i.address }}</td>
+                    <td>{{ i.no_of_items }}</td>
+                    <td>{{ i.ordered_date }}</td>
+                    <td>{{ i.delivery_status }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

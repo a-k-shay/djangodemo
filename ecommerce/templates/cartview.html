@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<center>
+    <div class="container mt-5" style="margin-bottom :100px;">
+        <div class="row  justify-content-center">
+            <h1>Shopping Cart</h1>
+
+            <div class="col-6">
+                <table class="table table-bordered">
+                    <tr>
+                        <th colspan="5">Cart-Items</th>
+                    </tr>
+                    {% for i in c %}
+                        <tr>
+                            <td>
+                                <img src="{{ i.product.image.url }}" height="200px" width="200px">
+
+                            </td>
+                            <td>
+                                <p>{{i.product.name}}</p>
+                            </td>
+                            <td>
+                                <h6>Productid:{{i.product.id}}</h6>
+                                <h6>Unit Price:{{i.product.price}}</h6>
+                                <h6>Quantity: {{i.quantity}}*{{i.product.price}}</h6>
+                                <h6>stock: {{i.product.stock}}-{{i.quantity}}</h6>
+                            </td>
+                            <td>Subtotal:{{i.subtotal}}</td>
+
+                            <td>
+                                {% if i.product.stock > 0 %}
+                                <a href="{% url 'cart:addtocart' i.product.name %}"> <i class="fa-solid fa-circle-plus text-secondary fs-5"></i></a>
+                                <a href="{% url 'cart:removecart' i.product.name %}"> <i class="fa-solid fa-circle-minus text-secondary fs-5"></i></a>
+                                <a href="{% url 'cart:full_remove' i.product.name %}"><i class="fa-solid fa-trash text-secondary fs-5"></i></a>
+                                {% else %}
+                                <a href="{% url 'cart:removecart' i.product.name %}"> <i class="fa-solid fa-circle-minus text-secondary fs-5"></i></a>
+                                <a href="{% url 'cart:full_remove' i.product.name %}"><i class="fa-solid fa-trash text-secondary fs-5"></i></a>
+                            </td>
+
+
+                        </tr>
+                    {% endif %}
+                    {% endfor %}
+                </table>
+            </div>
+            <div class="col-4">
+                <table class="table table-bordered">
+                    <tr>
+                        <th colspan="5">Check Out</th>
+                    </tr>
+                    <tr>
+                        <td>Total :{{total}}</td>
+                    </tr>
+                </table>
+                <a href="{% url 'cart:orderform' %}" class="btn btn-dark" style="position:absolute;left:1150px;">Place order</a>
+                <a href="{% url 'shop:allcat' %}" class="btn btn-dark" style="position:absolute;right:550px;">Continue Shopping</a>
+            </div>
+        </div>
+    </div>
+</center>
+{% endblock %}
